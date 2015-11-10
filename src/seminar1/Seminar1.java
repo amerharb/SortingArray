@@ -33,6 +33,23 @@ public class Seminar1
         arraySW.stop();
         long timeCreateNumberArray = arraySW.getPeriod();
         System.out.println("time of create the array in nano is :" + timeCreateNumberArray);
+
+        
+//        for (int i : numbers) {
+//            System.out.println(i);
+//        }
+
+        StopWatch sortSW = new StopWatch();
+        sortSW.start();
+        QuickSort.sortInt(numbers);
+        sortSW.stop();
+        long timeOfSortingArray = sortSW.getPeriod();
+        System.out.println("Time of sorting the arrya in nano is : " + timeOfSortingArray);
+
+        for (int i : numbers) {
+            System.out.println(i);
+        }
+              
     }
 
     public static void readNumbers()
