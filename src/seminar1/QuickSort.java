@@ -5,8 +5,6 @@
  */
 package seminar1;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-
 public class QuickSort
 {
 
