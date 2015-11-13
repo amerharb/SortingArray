@@ -24,7 +24,11 @@ public class Seminar1
      * @param args the command line arguments
      */
     static int[] numbers;
+    static int[] numbers100 = new int[100];
+    static int[] numbers10000 = new int[10000];
     static List<Integer> numbersList;
+    static List<Integer> numbersList100;
+    static List<Integer> numbersList10000;
 
     public static void main(String[] args)
     {
@@ -33,25 +37,60 @@ public class Seminar1
         readNumbers();
         arraySW.stop();
         long timeCreateNumberArray = arraySW.getPeriod();
-        System.out.println("time of reading file & create the array in nano is:" + timeCreateNumberArray);
-
-        //int[] numbers2 = numbers.clone();
-
-        StopWatch sortSW = new StopWatch();
+        System.out.println("time of reading file & create the Arrays and list in nano is:" + timeCreateNumberArray);
+        System.out.println("");
         
+        //int[] numbers2 = numbers.clone();
+        StopWatch sortSW = new StopWatch();
+
+        //Sort 1M ArrayList
         sortSW.reset();
         sortSW.start();
         QuickSortArrayList.sort(numbersList);
         sortSW.stop();
         long timeOfSortingArrayUseArrayList = sortSW.getPeriod();
-        System.out.println("Time of sorting the arrya use ArrayList : " + timeOfSortingArrayUseArrayList);
+        System.out.println("Time of sorting the Arrya 1M using ArrayList :  " + timeOfSortingArrayUseArrayList);
 
+        //Sort 10K ArrayList
+        sortSW.reset();
+        sortSW.start();
+        QuickSortArrayList.sort(numbersList10000);
+        sortSW.stop();
+        long timeOfSortingArrayUseArrayList10000 = sortSW.getPeriod();
+        System.out.println("Time of sorting the Arrya 10K using ArrayList:  " + timeOfSortingArrayUseArrayList10000);
+
+        //Sort 100 ArrayList
+        sortSW.reset();
+        sortSW.start();
+        QuickSortArrayList.sort(numbersList100);
+        sortSW.stop();
+        long timeOfSortingArrayUseArrayList100 = sortSW.getPeriod();
+        System.out.println("Time of sorting the Arrya 100 using ArrayList:  " + timeOfSortingArrayUseArrayList100);
+
+        //Sort 1M Array
+        System.out.println("");
         sortSW.reset();
         sortSW.start();
         QuickSort.sortInt(numbers);
         sortSW.stop();
         long timeOfSortingArray = sortSW.getPeriod();
-        System.out.println("Time of sorting the arryause only array : " + timeOfSortingArray);
+        System.out.println("Time of sorting the Arrya 1M using just Array:  " + timeOfSortingArray);
+
+        //Sort 10K Array
+        sortSW.reset();
+        sortSW.start();
+        QuickSort.sortInt(numbers10000);
+        sortSW.stop();
+        long timeOfSortingArray10000 = sortSW.getPeriod();
+        System.out.println("Time of sorting the Arrya 10K using just Array: " + timeOfSortingArray10000);
+
+        //Sort 100 Array
+        sortSW.reset();
+        sortSW.start();
+        QuickSort.sortInt(numbers100);
+        sortSW.stop();
+        long timeOfSortingArray100 = sortSW.getPeriod();
+        System.out.println("Time of sorting the Arrya 100 using just Array: " + timeOfSortingArray100);
 
 //        printArray(number2);
 //        sortSW.reset();
@@ -73,10 +112,13 @@ public class Seminar1
 //        }
 
         System.out.println("");
-        System.out.println("Array is faster by: " + (double)(timeOfSortingArrayUseArrayList) / timeOfSortingArray + "times");
+        System.out.println("Array 1M  is faster by: " + (double) (timeOfSortingArrayUseArrayList) / timeOfSortingArray + " times");
+        System.out.println("Array 10K is faster by: " + (double) (timeOfSortingArrayUseArrayList10000) / timeOfSortingArray10000 + " times");
+        System.out.println("Array 100 is faster by: " + (double) (timeOfSortingArrayUseArrayList100) / timeOfSortingArray100 + " times");
     }
-    
-    private static void printArray(int[] items){
+
+    private static void printArray(int[] items)
+    {
         for (int i : items) {
             System.out.println(i);
         }
@@ -92,15 +134,34 @@ public class Seminar1
                 String n = inFile.nextLine();
                 list.add(new Integer(n));
             }
-            
+
             numbersList = list;
-            numbers = new int[list.size()];
             
+            //fill arrayList of 100 eleiments
+            numbersList100 = new ArrayList<Integer>();
+            for (int i = 0; i < 100; i++) {
+                numbersList100.add(numbersList.get(i));
+            }
+            
+            //fill arrayList of 10000 eleiments
+            numbersList10000 = new ArrayList<Integer>();
+            for (int i = 0; i < 10000; i++) {
+                numbersList10000.add(numbersList.get(i));
+            }
+            
+            numbers = new int[list.size()];
+
             int i = 0;
             for (Integer s : list) {
                 numbers[i] = s.intValue();
                 i++;
             }
+
+            // array of 100 elemints
+            System.arraycopy(numbers, 0, numbers100, 0, 100);
+
+            // array of 10000 elemints
+            System.arraycopy(numbers, 0, numbers10000, 0, 10000);
 
             inFile.close();
 
