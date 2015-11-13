@@ -39,10 +39,10 @@ public class Seminar1
         long timeCreateNumberArray = arraySW.getPeriod();
         System.out.println("time of reading file & create the Arrays and list in nano is:" + timeCreateNumberArray);
         System.out.println("");
-        
-        //int[] numbers2 = numbers.clone();
+
         StopWatch sortSW = new StopWatch();
 
+         //int[] numbers2 = numbers.clone();
         //Sort 1M ArrayList
         sortSW.reset();
         sortSW.start();
@@ -92,7 +92,30 @@ public class Seminar1
         long timeOfSortingArray100 = sortSW.getPeriod();
         System.out.println("Time of sorting the Arrya 100 using just Array: " + timeOfSortingArray100);
 
-//        printArray(number2);
+//        printArray(numbers);
+        System.out.println("");
+        sortSW.reset();
+        sortSW.start();
+        InsertSort.Sort(numbers);
+        sortSW.stop();
+        long timeOfInsertSortingArray = sortSW.getPeriod();
+        System.out.println("Time of Insert sorting 1M the Arrya in nano is : " + timeOfInsertSortingArray);
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSort.Sort(numbers10000);
+        sortSW.stop();
+        long timeOfInsertSortingArray10000 = sortSW.getPeriod();
+        System.out.println("Time of Insert sorting 10K the Arrya in nano is: " + timeOfInsertSortingArray10000);
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSort.Sort(numbers100);
+        sortSW.stop();
+        long timeOfInsertSortingArray100 = sortSW.getPeriod();
+        System.out.println("Time of Insert sorting 1M the Arrya in nano is : " + timeOfInsertSortingArray100);
+//        printArray(numbers);
+
 //        sortSW.reset();
 //        sortSW.start();
 //        QuickSortMultiThread qsmt = new QuickSortMultiThread(numbers2);
@@ -110,11 +133,10 @@ public class Seminar1
 //                break;
 //            }
 //        }
-
         System.out.println("");
-        System.out.println("Array 1M  is faster by: " + (double) (timeOfSortingArrayUseArrayList) / timeOfSortingArray + " times");
-        System.out.println("Array 10K is faster by: " + (double) (timeOfSortingArrayUseArrayList10000) / timeOfSortingArray10000 + " times");
-        System.out.println("Array 100 is faster by: " + (double) (timeOfSortingArrayUseArrayList100) / timeOfSortingArray100 + " times");
+//        System.out.println("Array 1M  is faster by: " + (double) (timeOfSortingArrayUseArrayList) / timeOfSortingArray + " times");
+//        System.out.println("Array 10K is faster by: " + (double) (timeOfSortingArrayUseArrayList10000) / timeOfSortingArray10000 + " times");
+//        System.out.println("Array 100 is faster by: " + (double) (timeOfSortingArrayUseArrayList100) / timeOfSortingArray100 + " times");
     }
 
     private static void printArray(int[] items)
@@ -136,19 +158,21 @@ public class Seminar1
             }
 
             numbersList = list;
-            
+
             //fill arrayList of 100 eleiments
-            numbersList100 = new ArrayList<Integer>();
-            for (int i = 0; i < 100; i++) {
-                numbersList100.add(numbersList.get(i));
+            if (numbersList.size() >= 10000) { //which mean its not a test
+                numbersList100 = new ArrayList<Integer>();
+                for (int i = 0; i < 100; i++) {
+                    numbersList100.add(numbersList.get(i));
+                }
+
+                //fill arrayList of 10000 eleiments
+                numbersList10000 = new ArrayList<Integer>();
+                for (int i = 0; i < 10000; i++) {
+                    numbersList10000.add(numbersList.get(i));
+                }
             }
-            
-            //fill arrayList of 10000 eleiments
-            numbersList10000 = new ArrayList<Integer>();
-            for (int i = 0; i < 10000; i++) {
-                numbersList10000.add(numbersList.get(i));
-            }
-            
+
             numbers = new int[list.size()];
 
             int i = 0;
@@ -157,12 +181,13 @@ public class Seminar1
                 i++;
             }
 
-            // array of 100 elemints
-            System.arraycopy(numbers, 0, numbers100, 0, 100);
+            if (numbersList.size() >= 10000) { //which mean its not a test
+                // array of 100 elemints
+                System.arraycopy(numbers, 0, numbers100, 0, 100);
 
-            // array of 10000 elemints
-            System.arraycopy(numbers, 0, numbers10000, 0, 10000);
-
+                // array of 10000 elemints
+                System.arraycopy(numbers, 0, numbers10000, 0, 10000);
+            }
             inFile.close();
 
         } catch (FileNotFoundException ex) {
