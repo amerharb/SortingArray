@@ -13,7 +13,7 @@ public class QuickSortMultiThread implements Runnable
         initItems = arrayToSort;
     }
 
-    private void sortInt(int[] items) throws InterruptedException
+    private void sort(int[] items) throws InterruptedException
     {
         if (items.length > 1) {
             int[] tempSmaller = new int[items.length];
@@ -59,11 +59,11 @@ public class QuickSortMultiThread implements Runnable
                 Thread sortSmallerThread = new Thread(sortSmaller);
                 sortSmallerThread.start();
 
-                sortInt(larger); // Recursive call!
+                sort(larger); // Recursive call!
                 sortSmallerThread.join();
             } else {
-                sortInt(smaller); // Recursive call!
-                sortInt(larger); // Recursive call!
+                sort(smaller); // Recursive call!
+                sort(larger); // Recursive call!
             }
 
             int x = 0;
@@ -98,7 +98,7 @@ public class QuickSortMultiThread implements Runnable
     public void run()
     {
         try {
-            sortInt(initItems);
+            sort(initItems);
         } catch (InterruptedException ex) {
             Logger.getLogger(QuickSortMultiThread.class.getName()).log(Level.SEVERE, null, ex);
         }

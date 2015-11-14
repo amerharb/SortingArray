@@ -3,7 +3,7 @@ package seminar1;
 public class InsertSort
 {
 
-    public static void Sort(int[] list)
+    public static void sort(int[] list)
     {
         int j;
 
