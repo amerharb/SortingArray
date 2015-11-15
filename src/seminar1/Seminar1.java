@@ -27,34 +27,10 @@ public class Seminar1
         arraySW.start();
         readNumbers();
         arraySW.stop();
-        System.out.println("time of reading file & create the Arrays and list in nano is:" + arraySW.getPeriod());
+        System.out.println("time of reading file & create the Arrays and list in nano is:" + arraySW.getPeriod() + " = " + getTimed(arraySW.getPeriod()));
         System.out.println("");
 
         StopWatch sortSW = new StopWatch();
-
-        //Sort 1M ArrayList
-        numbersList1M = new ArrayList<Integer>();
-        numbersList1M.addAll(numbersList);
-
-        sortSW.reset();
-        sortSW.start();
-        QuickSortArrayList.sort(numbersList1M);
-        sortSW.stop();
-        System.out.println("Time of QuickSorting, 1M  Elemints using ArrayList  :  " + sortSW.getPeriod());
-
-        //Sort 10K ArrayList
-        //fill arrayList of 10000 eleiments
-        numbersList10K = new ArrayList<Integer>();
-        for (int i = 0; i < 10000; i++) {
-            numbersList10K.add(numbersList.get(i));
-        }
-
-        sortSW.reset();
-        sortSW.start();
-        QuickSortArrayList.sort(numbersList10K);
-        sortSW.stop();
-        System.out.println("Time of QuickSorting, 10K Elemints using ArrayList  :  " + sortSW.getPeriod());
-
         //Sort 100 ArrayList
         //fill arrayList of 100 eleiments
         numbersList100 = new ArrayList<Integer>();
@@ -66,49 +42,9 @@ public class Seminar1
         sortSW.start();
         QuickSortArrayList.sort(numbersList100);
         sortSW.stop();
-        System.out.println("Time of QuickSorting, 100 Elemints using ArrayList  :  " + sortSW.getPeriod());
+        System.out.println("Time of QuickSorting, 100 Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
-        //Sort 1M Array
-        System.out.println("");
-        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
-
-        sortSW.reset();
-        sortSW.start();
-        QuickSort.sortInt(numbers1M);
-        sortSW.stop();
-        System.out.println("Time of QuickSorting, 1M  Elemints using Just Array :  " + sortSW.getPeriod());
-
-        //Sort 10K Array
-        System.arraycopy(numbers, 0, numbers10K, 0, 10000);
-
-        sortSW.reset();
-        sortSW.start();
-        QuickSort.sortInt(numbers10K);
-        sortSW.stop();
-        System.out.println("Time of QuickSorting, 10K Elemints using Just Array :  " + sortSW.getPeriod());
-
-        //Sort 100 Array
-        System.arraycopy(numbers, 0, numbers100, 0, 100);
-
-        sortSW.reset();
-        sortSW.start();
-        QuickSort.sortInt(numbers100);
-        sortSW.stop();
-        System.out.println("Time of QuickSorting, 100 Elemints using Just Array :  " + sortSW.getPeriod());
-
-        //Insertsorting ArrayList
-        System.out.println("");
-        //Sort 1M ArrayList
-        numbersList1M = new ArrayList<Integer>();
-        numbersList1M.addAll(numbersList);
-
-        sortSW.reset();
-        sortSW.start();
-        InsertSortArrayList.sort(numbersList1M);
-        sortSW.stop();
-        System.out.println("Time of InsertSorting, 1M  Elemints using ArrayList :  " + sortSW.getPeriod());
-
-        //Sort 10K ArrayList
+        //QuickSort 10K ArrayList
         //fill arrayList of 10000 eleiments
         numbersList10K = new ArrayList<Integer>();
         for (int i = 0; i < 10000; i++) {
@@ -119,7 +55,50 @@ public class Seminar1
         sortSW.start();
         QuickSortArrayList.sort(numbersList10K);
         sortSW.stop();
-        System.out.println("Time of InsertSorting, 10K Elemints using ArrayList :  " + sortSW.getPeriod());
+        System.out.println("Time of QuickSorting, 10K Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //QuickSort  1M ArrayList
+        numbersList1M = new ArrayList<Integer>();
+        numbersList1M.addAll(numbersList);
+
+        sortSW.reset();
+        sortSW.start();
+        QuickSortArrayList.sort(numbersList1M);
+        sortSW.stop();
+        System.out.println("Time of QuickSorting, 1M  Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //Just Array
+        System.out.println("");
+
+        //QuickSort 100 Array
+        System.arraycopy(numbers, 0, numbers100, 0, 100);
+
+        sortSW.reset();
+        sortSW.start();
+        QuickSort.sortInt(numbers100);
+        sortSW.stop();
+        System.out.println("Time of QuickSorting, 100 Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //QuickSort 10K Array
+        System.arraycopy(numbers, 0, numbers10K, 0, 10000);
+
+        sortSW.reset();
+        sortSW.start();
+        QuickSort.sortInt(numbers10K);
+        sortSW.stop();
+        System.out.println("Time of QuickSorting, 10K Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //QuickSort 1M Array
+        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
+
+        sortSW.reset();
+        sortSW.start();
+        QuickSort.sortInt(numbers1M);
+        sortSW.stop();
+        System.out.println("Time of QuickSorting, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //Insertsorting ArrayList
+        System.out.println("");
 
         //Sort 100 ArrayList
         //fill arrayList of 100 eleiments
@@ -132,37 +111,61 @@ public class Seminar1
         sortSW.start();
         InsertSortArrayList.sort(numbersList100);
         sortSW.stop();
-        System.out.println("Time of InsertSorting, 100 Elemints using ArrayList :  " + sortSW.getPeriod());
+        System.out.println("Time of InsertSorting, 100 Elemints using ArrayList :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
-        
+        //Sort 10K ArrayList
+        //fill arrayList of 10000 eleiments
+        numbersList10K = new ArrayList<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            numbersList10K.add(numbersList.get(i));
+        }
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSortArrayList.sort(numbersList10K);
+        sortSW.stop();
+        System.out.println("Time of InsertSorting, 10K Elemints using ArrayList :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //InsertSort 1M ArrayList
+        numbersList1M = new ArrayList<Integer>();
+        numbersList1M.addAll(numbersList);
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSortArrayList.sort(numbersList1M);
+        sortSW.stop();
+        System.out.println("Time of InsertSorting, 1M  Elemints using ArrayList :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //InsertSort using just Array
         System.out.println("");
-        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
 
-        sortSW.reset();
-        sortSW.start();
-        InsertSort.sort(numbers1M);
-        sortSW.stop();
-        System.out.println("Time of insertSorting, 1M  Elemints using Just Array:  " + sortSW.getPeriod());
-
-        
-        System.arraycopy(numbers, 0, numbers10K, 0, 10000);
-
-        sortSW.reset();
-        sortSW.start();
-        InsertSort.sort(numbers10K);
-        sortSW.stop();
-        System.out.println("Time of insertSorting, 10K Elemints using Just Array:  " + sortSW.getPeriod());
-
-        
+        //InsertSort 100 just Array
         System.arraycopy(numbers, 0, numbers100, 0, 100);
 
         sortSW.reset();
         sortSW.start();
         InsertSort.sort(numbers100);
         sortSW.stop();
-        System.out.println("Time of insertSorting, 100 Elemints using Just Array:  " + sortSW.getPeriod());
+        System.out.println("Time of insertSorting, 100 Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
-        
+        //InsertSort 10K just Array
+        System.arraycopy(numbers, 0, numbers10K, 0, 10000);
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSort.sort(numbers10K);
+        sortSW.stop();
+        System.out.println("Time of insertSorting, 10K Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //InsertSort 1M just array
+        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
+
+        sortSW.reset();
+        sortSW.start();
+        InsertSort.sort(numbers1M);
+        sortSW.stop();
+        System.out.println("Time of insertSorting, 1M  Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
 //        sortSW.reset();
 //        sortSW.start();
 //        QuickSortMultiThread qsmt = new QuickSortMultiThread(numbers2);
@@ -190,6 +193,44 @@ public class Seminar1
     {
         for (int i : items) {
             System.out.println(i);
+        }
+    }
+
+    private static String getTimed(long value)
+    {
+        try {
+            final long B = 1000000000;
+
+            int hours = (int) (value / (B * 60 * 60));
+            value -= hours * (B * 60 * 60);
+            int min = (int) (value / (B * 60));
+            value -= min * (B * 60);
+            int sec = (int) (value / B);
+            value -= sec * (B);
+            int mil = (int) (value / 1000000);
+            value -= mil * 1000000;
+
+            String S = "";
+            if (hours > 0) {
+                S += hours + " hours ";
+            }
+            if (min > 0) {
+                S += min + " min ";
+            }
+            if (mil <= 0) {
+                S += sec + " sec";
+            } else if (mil < 10) {
+                S += sec + ".00" + mil + " sec";
+            } else if (mil < 100) {
+                S += sec + ".0" + mil + " sec";
+            } else {
+                S += sec + "." + mil + " sec";
+            }
+
+            return S;
+
+        } catch (Exception e) {
+            return "";
         }
     }
 
