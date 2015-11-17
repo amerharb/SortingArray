@@ -23,6 +23,7 @@ public class Seminar1
 
     public static void main(String[] args)
     {
+        
         StopWatch arraySW = new StopWatch();
         arraySW.start();
         readNumbers();
@@ -31,6 +32,45 @@ public class Seminar1
         System.out.println("");
 
         StopWatch sortSW = new StopWatch();
+
+        //MergeSort ArrayList
+        System.out.println("");
+        
+        //MergeSort 100 ArrayList
+        //fill arrayList of 100 eleiments
+        numbersList100 = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            numbersList100.add(numbersList.get(i));
+        }
+
+        sortSW.reset();
+        sortSW.start();
+        MergeSortArrayList.mergeSort(numbersList100);
+        sortSW.stop();
+        System.out.println("Time of MergeSorting, 100 Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+        
+        //MergeSort 10K ArrayList
+        //fill arrayList of 10000 eleiments
+        numbersList10K = new ArrayList<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            numbersList10K.add(numbersList.get(i));
+        }
+
+        sortSW.reset();
+        sortSW.start();
+        MergeSortArrayList.mergeSort(numbersList10K);
+        sortSW.stop();
+        System.out.println("Time of MergeSorting, 10K Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+
+        //QuickSort  1M ArrayList
+        numbersList1M = new ArrayList<Integer>();
+        numbersList1M.addAll(numbersList);
+
+        sortSW.reset();
+        sortSW.start();
+        QuickSortArrayList.sort(numbersList1M);
+        sortSW.stop();
+        System.out.println("Time of MergeSorting, 1M  Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
         //MergeSort Array
         System.out.println("");
@@ -42,7 +82,7 @@ public class Seminar1
         sortSW.start();
         MergeSort.mergeSort(numbers100);
         sortSW.stop();
-        System.out.println("Time of  MergeSorting, 100 Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+        System.out.println("Time of MergeSorting, 100 Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
         //MergeSort 10K just Array
         System.arraycopy(numbers, 0, numbers10K, 0, 10000);
@@ -51,7 +91,7 @@ public class Seminar1
         sortSW.start();
         MergeSort.mergeSort(numbers10K);
         sortSW.stop();
-        System.out.println("Time of  MergeSorting, 10K Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+        System.out.println("Time of MergeSorting, 10K Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
         //MergeSort 1M just Array
         System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
@@ -60,7 +100,7 @@ public class Seminar1
         sortSW.start();
         MergeSort.mergeSort(numbers1M);
         sortSW.stop();
-        System.out.println("Time of  MergeSorting, 1M  Elemints using Just Array:  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+        System.out.println("Time of MergeSorting, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
         
         //QuickSort Array List
