@@ -21,7 +21,7 @@ public class Seminar1
     static List<Integer> numbersList100;
     static List<Integer> numbersList10K;
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         
         StopWatch arraySW = new StopWatch();
@@ -102,6 +102,13 @@ public class Seminar1
         sortSW.stop();
         System.out.println("Time of MergeSorting, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
+       
+        sortSW.reset();
+        sortSW.start();
+        System.out.println(BinarySearch.binarySearch(numbers1M, 2)); 
+        sortSW.stop();
+        System.out.println("Time of Binary search, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+ 
         
         //QuickSort Array List
         System.out.println("");
