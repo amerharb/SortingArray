@@ -3,8 +3,8 @@ package seminar1;
 public class StopWatch
 {
 
-    private long period;
-    private long startTime;
+    private long period = 0;
+    private long startTime = System.nanoTime();
     private boolean status = false; //false = Stoped, true = Running
 
     public void start()
