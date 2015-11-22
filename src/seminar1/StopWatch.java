@@ -5,18 +5,18 @@ public class StopWatch
 
     private long period;
     private long startTime;
-    private byte status; //0- stoped, 1-running
+    private boolean status = false; //false = Stoped, true = Running
 
     public void start()
     {
         startTime = System.nanoTime();
-        status = 1;
+        status = true; //Running
     }
 
     public void stop()
     {
         period += (System.nanoTime() - startTime);
-        status = 0;
+        status = false; //Stoped
     }
 
     public void reset()
@@ -27,14 +27,10 @@ public class StopWatch
 
     public long getPeriod()
     {
-        switch (status) {
-        case 0:
-            return period;
-        case 1:
+        if (status) { //Running
             return period + (System.nanoTime() - startTime);
-        default :
+        } else { //Stoped
             return period;
         }
     }
-
 }
