@@ -32,8 +32,9 @@ public class StopWatch
             return period;
         case 1:
             return period + (System.nanoTime() - startTime);
+        default :
+            return period;
         }
-        return period;
     }
 
 }
