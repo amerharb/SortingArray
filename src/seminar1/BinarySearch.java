@@ -14,21 +14,23 @@ import java.util.List;
 public class BinarySearch
 {
 
-    class element
+    static class Element
     {
-
-        int OriginalOrder;
-        int value;
+        final int originalOrder;
+        final int value;
+        public Element(int originalOrder, int value){
+            this.originalOrder = originalOrder;
+            this.value = value;
+        }
     }
 
     public static int binarySearch(int[] a, int x) 
     {
-        element[] eList = new element[a.length];
+        Element[] eList = new Element[a.length];
 
-        for (element e : eList) {
-            int i = 0;
-            e.value = a[i];
-            e.OriginalOrder = i;
+        int i = 0;
+        for (Element e : eList) {
+            e = new Element(i, a[i]);
             i++;
         }
         
@@ -37,19 +39,19 @@ public class BinarySearch
         return eList[binarySearchOrderedArray(eList, x)].OriginalOrder;
     }
 
-    private static void sortElement(element[] items)
+    private static void sortElement(Element[] items)
     {
         if (items.length > 1) {
-            element[] tempSmaller = new element[items.length];
-            element[] tempSame = new element[items.length];
-            element[] tempLarger = new element[items.length];
+            Element[] tempSmaller = new Element[items.length];
+            Element[] tempSame = new Element[items.length];
+            Element[] tempLarger = new Element[items.length];
 
             int smallerCounter = 0, sameCounter = 0, largerCounter = 0;
             
-            element chosenItem = items[items.length / 2];
+            Element chosenItem = items[items.length / 2];
             for (int i = 0; i < items.length; i++) {
                 if (items[i].value < chosenItem.value) {
-                    tempSmaller[smallerCounter].value = items[i].value;
+                    tempSmaller[smallerCounter] = items[i];
                     smallerCounter++;
                 } else if (items[i].value > chosenItem.value) {
                     tempLarger[largerCounter] = items[i];
@@ -60,19 +62,19 @@ public class BinarySearch
                 }
             }
             
-            element[] smaller = new element[smallerCounter];
+            Element[] smaller = new Element[smallerCounter];
             for (int i = 0; i < smallerCounter; i++) {
                 smaller[i] = tempSmaller[i];
             }
             tempSmaller = null;
             
-            element[] same = new element[sameCounter];
+            Element[] same = new Element[sameCounter];
             for (int i = 0; i < sameCounter; i++) {
                 same[i] = tempSame[i];
             }
             tempSame = null;
             
-            element[] larger = new element[largerCounter];
+            Element[] larger = new Element[largerCounter];
             for (int i = 0; i < largerCounter; i++) {
                 larger[i] = tempLarger[i];
             }
@@ -83,19 +85,19 @@ public class BinarySearch
 
             int x = 0;
             
-            for (element i : smaller) {
+            for (Element i : smaller) {
                 items[x] = i;
                 x++;
             }
             smaller = null;
             
-            for (element i : same) {
+            for (Element i : same) {
                 items[x] = i;
                 x++;
             }
             same = null;
             
-            for (element i : larger) {
+            for (Element i : larger) {
                 items[x] = i;
                 x++;
             }
@@ -104,7 +106,7 @@ public class BinarySearch
         }
     }
 
-    private static int binarySearchOrderedArray(element[] a, int x)
+    private static int binarySearchOrderedArray(Element[] a, int x)
     {
 
         int low = 0, high = a.length - 1;
