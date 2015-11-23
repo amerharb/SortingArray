@@ -23,7 +23,7 @@ public class Seminar1
 
     public static void main(String[] args) throws Exception
     {
-        
+
         StopWatch arraySW = new StopWatch();
         arraySW.start();
         readNumbers();
@@ -33,9 +33,24 @@ public class Seminar1
 
         StopWatch sortSW = new StopWatch();
 
+        //Binary Search
+        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
+
+        
+        sortSW.reset();
+        sortSW.start();
+        int[] loc = BinarySearch.binarySearch(numbers1M, 23);
+        sortSW.stop();
+        System.out.println("has been found in " + loc.length + " Locations:");
+        for (int l : loc) {
+            System.out.print(l + ", ");
+        }
+        System.out.println("");
+        System.out.println("Time of Binary search, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
+        
         //MergeSort ArrayList
         System.out.println("");
-        
+
         //MergeSort 100 ArrayList
         //fill arrayList of 100 eleiments
         numbersList100 = new ArrayList<Integer>();
@@ -48,7 +63,7 @@ public class Seminar1
         MergeSortArrayList.mergeSort(numbersList100);
         sortSW.stop();
         System.out.println("Time of MergeSorting, 100 Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
-        
+
         //MergeSort 10K ArrayList
         //fill arrayList of 10000 eleiments
         numbersList10K = new ArrayList<Integer>();
@@ -74,7 +89,7 @@ public class Seminar1
 
         //MergeSort Array
         System.out.println("");
-        
+
         //MergeSort 100 just Array
         System.arraycopy(numbers, 0, numbers100, 0, 100);
 
@@ -102,17 +117,9 @@ public class Seminar1
         sortSW.stop();
         System.out.println("Time of MergeSorting, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
 
-       
-        sortSW.reset();
-        sortSW.start();
-        System.out.println(BinarySearch.binarySearch(numbers1M, 2)); 
-        sortSW.stop();
-        System.out.println("Time of Binary search, 1M  Elemints using Just Array :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
- 
-        
         //QuickSort Array List
         System.out.println("");
-        
+
         //Sort 100 ArrayList
         //fill arrayList of 100 eleiments
         numbersList100 = new ArrayList<Integer>();
@@ -125,7 +132,7 @@ public class Seminar1
         QuickSortArrayList.sort(numbersList100);
         sortSW.stop();
         System.out.println("Time of QuickSorting, 100 Elemints using ArrayList  :  " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
-        
+
         //QuickSort 10K ArrayList
         //fill arrayList of 10000 eleiments
         numbersList10K = new ArrayList<Integer>();

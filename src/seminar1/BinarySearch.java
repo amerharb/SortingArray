@@ -16,27 +16,40 @@ public class BinarySearch
 
     static class Element
     {
+
         final int originalOrder;
         final int value;
-        public Element(int originalOrder, int value){
+
+        public Element(int originalOrder, int value)
+        {
             this.originalOrder = originalOrder;
             this.value = value;
         }
     }
 
-    public static int binarySearch(int[] a, int x) 
+    public static int[] binarySearch(int[] a, int x)
     {
         Element[] eList = new Element[a.length];
 
-        int i = 0;
-        for (Element e : eList) {
-            e = new Element(i, a[i]);
-            i++;
+        for (int i = 0; i < eList.length; i++) {
+            eList[i] = new Element(i, a[i]);
         }
-        
+
         sortElement(eList);
-        
-        return eList[binarySearchOrderedArray(eList, x)].OriginalOrder;
+        int FirstLoc = binarySearchFirstElementInOrderedArray(eList, x);
+        int LastLoc = binarySearchLastElementInOrderedArray(eList, x);
+
+        if (FirstLoc == -1 || LastLoc == -1) {
+            return (new int[0]); // nothing found return array of zero elements
+        } else {
+            int[] results = new int[LastLoc - FirstLoc + 1];
+            int j = 0;
+            for (int i = FirstLoc; i < LastLoc + 1; i++) {
+                results[j] = eList[i].originalOrder;
+                j++;
+            }
+            return results;
+        }
     }
 
     private static void sortElement(Element[] items)
@@ -47,7 +60,7 @@ public class BinarySearch
             Element[] tempLarger = new Element[items.length];
 
             int smallerCounter = 0, sameCounter = 0, largerCounter = 0;
-            
+
             Element chosenItem = items[items.length / 2];
             for (int i = 0; i < items.length; i++) {
                 if (items[i].value < chosenItem.value) {
@@ -61,44 +74,44 @@ public class BinarySearch
                     sameCounter++;
                 }
             }
-            
+
             Element[] smaller = new Element[smallerCounter];
             for (int i = 0; i < smallerCounter; i++) {
                 smaller[i] = tempSmaller[i];
             }
             tempSmaller = null;
-            
+
             Element[] same = new Element[sameCounter];
             for (int i = 0; i < sameCounter; i++) {
                 same[i] = tempSame[i];
             }
             tempSame = null;
-            
+
             Element[] larger = new Element[largerCounter];
             for (int i = 0; i < largerCounter; i++) {
                 larger[i] = tempLarger[i];
             }
             tempLarger = null;
-            
+
             sortElement(smaller); // Recursive call!
             sortElement(larger); // Recursive call!
 
             int x = 0;
-            
-            for (Element i : smaller) {
-                items[x] = i;
+
+            for (Element e : smaller) {
+                items[x] = e;
                 x++;
             }
             smaller = null;
-            
-            for (Element i : same) {
-                items[x] = i;
+
+            for (Element e : same) {
+                items[x] = e;
                 x++;
             }
             same = null;
-            
-            for (Element i : larger) {
-                items[x] = i;
+
+            for (Element e : larger) {
+                items[x] = e;
                 x++;
             }
             larger = null;
@@ -106,7 +119,7 @@ public class BinarySearch
         }
     }
 
-    private static int binarySearchOrderedArray(Element[] a, int x)
+    private static int binarySearchFirstElementInOrderedArray(Element[] a, int x)
     {
 
         int low = 0, high = a.length - 1;
@@ -119,7 +132,42 @@ public class BinarySearch
             } else if (a[mid].value > x) {
                 high = mid - 1;
             } else {
+                //Found, now we will go back to get first one with same value
+                for (int i = mid - 1; i >= 0; i--) {
+                    if (a[i].value == x) {
+                        mid--;
+                    } else {
+                        return mid;
+                    }
+                }
                 return mid; // Found
+            }
+        }
+        return -1; // NOT_FOUND is defined as -1
+    }
+
+    private static int binarySearchLastElementInOrderedArray(Element[] a, int x)
+    {
+
+        int low = 0, high = a.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (a[mid].value < x) {
+                low = mid + 1;
+            } else if (a[mid].value > x) {
+                high = mid - 1;
+            } else {
+                //Found, now we will go Forward one by one to get last one with the same value
+                for (int i = mid + 1; i < a.length; i++) {
+                    if (a[i].value == x) {
+                        mid++;
+                    } else {
+                        return mid;
+                    }
+                }
+                return mid;
             }
         }
         return -1; // NOT_FOUND is defined as -1
