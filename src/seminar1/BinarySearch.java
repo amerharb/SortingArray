@@ -5,6 +5,7 @@
  */
 package seminar1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,24 @@ public class BinarySearch
         }
     }
 
-    public static int[] binarySearch(int[] a, int x)
+    public static int[] goThrowSearch(int[] a, int x)
+    {
+        List<Integer> list = new ArrayList<Integer>();
+
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == x) {
+                list.add(i);
+            }
+        }
+
+        int[] res = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
+        }
+        return res;
+    }
+
+    public static int[] binarySearchUsingElements(int[] a, int x)
     {
         Element[] eList = new Element[a.length];
 
@@ -169,6 +187,56 @@ public class BinarySearch
                 }
                 return mid;
             }
+        }
+        return -1; // NOT_FOUND is defined as -1
+    }
+
+    public static int binarySearch(int[] a, int x)
+    {
+
+        int low = 0, high = a.length - 1;
+
+        int counter = 0;
+        while (low <= high) {
+            counter++;
+            int mid = (low + high) / 2;
+
+            if (a[mid] < x) {
+                low = mid + 1;
+            } else if (a[mid] > x) {
+                high = mid - 1;
+            } else {
+                System.out.println("counter " + counter);
+                return mid; //Found
+            }
+        }
+        return -1; // NOT_FOUND is defined as -1
+    }
+
+    public static int binarySearchAdv(int[] a, int x)
+    {
+        int LV = a[0], HV = a[a.length - 1];
+
+        if (x > HV || x < LV) {
+            return -1;
+        }
+
+        int low = 0, high = a.length - 1;
+
+        int counter = 0;
+        int mid = (int)((double)(x - LV) / (HV - LV) * (a.length - 1));
+
+        while (low <= high) {
+            counter++;
+            if (a[mid] < x) {
+                low = mid + 1;
+            } else if (a[mid] > x) {
+                high = mid - 1;
+            } else {
+                System.out.println("counter " + counter);
+                return mid; //Found
+            }
+            mid = (low + high) / 2;
         }
         return -1; // NOT_FOUND is defined as -1
     }
