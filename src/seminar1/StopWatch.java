@@ -33,4 +33,12 @@ public class StopWatch
             return period;
         }
     }
+    
+    public long getStartPeriod(){ //give you the time from last time start called without adding pervoise periods
+        if (status) { //Running
+            return (System.nanoTime() - startTime);
+        } else { //Stoped
+            return 0;
+        }
+    }
 }
