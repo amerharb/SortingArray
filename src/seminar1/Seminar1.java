@@ -41,6 +41,9 @@ public class Seminar1
         static long QuickSort100;
         static long QuickSort10K;
         static long QuickSort1M;
+        static long QuickSortMT100;
+        static long QuickSortMT10K;
+        static long QuickSortMT1M;
         static long QuickSortArrayList100;
         static long QuickSortArrayList10K;
         static long QuickSortArrayList1M;
@@ -55,29 +58,6 @@ public class Seminar1
         System.out.println("time of reading file & create the Arrays and list in nano is:" + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
         System.out.println("");
 
-        /*
-         int sum;
-         int n = 1000000000;
-        
-         sortSW.reset();
-         sortSW.start();
-         sum = 0;
-         for (int i = 0; i < n; i++) {
-         sum = sum + 1;
-         }
-         sortSW.stop();
-         System.out.println("sum++         : " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
-
-         sortSW.reset();
-         sortSW.start();
-         sum = 0;
-         for (int i = 0; i < n; i++) {
-         sum++;
-         }
-         sortSW.stop();
-         System.out.println("sum = sum + 1 : " + sortSW.getPeriod() + " = " + getTimed(sortSW.getPeriod()));
-         System.out.println(sum);
-         */
         while (true) {
             System.out.println("");
             System.out.println("--------------------------------------------------------------------------------------");
@@ -95,6 +75,31 @@ public class Seminar1
 
             if (ans.contains("EXIT")) {
                 break;
+            }
+            if (ans.contains("T")) {
+                System.out.println("TEST TEST TEST");
+                System.out.println("");
+                System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
+                QuickSort.sortInt(numbers1M);
+                for (int i = 0; i <= 100; i++) {
+                    BinarySearch.resetBinaryCounter();
+                    BinarySearch.binarySearch(numbers1M, i);
+                    BinarySearch.resetAdvBinaryCounter();
+                    BinarySearch.binarySearchAdv(numbers1M, i);
+                    if (BinarySearch.binaryCounter < BinarySearch.advBinaryCounter) {
+                        System.out.println("normal is faster than adv at this value : " + i);
+                    }
+                }
+
+                //int[] a = {2, 2, 3, 4, 5, 6, 6, 6, 7, 15, 16, 34, 36, 37, 38, 41, 50, 51, 55, 55};
+                int[] a = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 98, 99};
+                BinarySearch.resetBinaryCounter();
+                BinarySearch.binarySearch(a, 2);
+                System.out.println(BinarySearch.getBinaryCounter());
+                BinarySearch.resetAdvBinaryCounter();
+                BinarySearch.binarySearchAdv(a, 2);
+                System.out.println(BinarySearch.getAdvBinaryCounter());
+
             }
             if (ans.contains("U")) {
                 System.out.println("search all value will take some time");
@@ -124,6 +129,11 @@ public class Seminar1
                 //MergeSort Array
                 mergeSortJustArray();
             }
+
+            if (ans.contains("Z") || ans.contains("A")) {
+                quickSortArrayMultiThreads();
+            }
+
             if (ans.contains("Q") || ans.contains("A")) {
                 //QuickSort Array List
                 quickSortArrayList();
@@ -161,23 +171,6 @@ public class Seminar1
         }
 
         System.out.println("Good Bye!");
-//        sortSW.reset();
-//        sortSW.start();
-//        QuickSortMultiThread qsmt = new QuickSortMultiThread(numbers2);
-//        
-//        qsmt.run();
-//        sortSW.stop();
-//        long timeOfSortingArrayMultiThread = sortSW.getPeriod();
-//        System.out.println("Time of sorting the arrya MultiThreads in nano is : " + timeOfSortingArrayMultiThread);
-////        printArray(number2);
-//        
-//        //check if both array match
-//        for (int i = 0; i < numbers.length; i++) {
-//            if (numbers[i] != numbers2[i]){
-//                System.out.println("NO MACH there is error in sorting");
-//                break;
-//            }
-//        }
 //        System.out.println("");
 //        System.out.println("Array 1M  is faster by: " + (double) (timeOfSortingArrayUseArrayList) / timeOfSortingArray + " times");
 //        System.out.println("Array 10K is faster by: " + (double) (timeOfSortingArrayUseArrayList10000) / timeOfSortingArray10000 + " times");
@@ -301,7 +294,7 @@ public class Seminar1
         SW.start();
         for (int i = 0; i <= 100; i++) {
             if (BinarySearch.binarySearchAdv(numbers1M, i) == -1) {
-                System.out.println("ERROR");
+                System.out.println("ERROR value not found");
             }
         }
         SW.stop();
@@ -378,7 +371,7 @@ public class Seminar1
 
         SW.reset();
         SW.start();
-        MergeSortArrayList.mergeSort(numbersList);
+        MergeSortArrayList.mergeSort(numbersList1M);
         SW.stop();
         periods.MergeSortArrayList1M = SW.getPeriod();
         System.out.println("Time of MergeSorting, 1M  Elemints using ArrayList  :  " + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
@@ -418,6 +411,60 @@ public class Seminar1
         SW.stop();
         periods.MergeSort1M = SW.getPeriod();
         System.out.println("Time of MergeSorting, 1M  Elemints using Just Array :  " + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
+
+    }
+
+    private static void quickSortArrayMultiThreads()
+    {
+        System.out.println("");
+
+        //QuickSort 100 Array MultiThread
+        System.arraycopy(numbers, 0, numbers100, 0, 100);
+
+        SW.reset();
+        SW.start();
+        QuickSortMultiThread qsmt = new QuickSortMultiThread(numbers100);
+        qsmt.run();
+        SW.stop();
+        periods.QuickSortMT100 = SW.getPeriod();
+        System.out.println("Time of QuickSorting MT, 100 Elemints using Just Array:" + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
+
+        //check if array sorted
+        if (!isArraySorted(numbers100)) {
+            System.out.println("there is error in sorting");
+        }
+
+        //QuickSort 10K Array MultiThread
+        System.arraycopy(numbers, 0, numbers10K, 0, 10000);
+
+        SW.reset();
+        SW.start();
+        qsmt = new QuickSortMultiThread(numbers10K);
+        qsmt.run();
+        SW.stop();
+        periods.QuickSortMT10K = SW.getPeriod();
+        System.out.println("Time of QuickSorting MT, 10K Elemints using Just Array:" + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
+
+        //check if array sorted
+        if (!isArraySorted(numbers10K)) {
+            System.out.println("there is error in sorting");
+        }
+
+        //QuickSort 1M Array MultiThread
+        System.arraycopy(numbers, 0, numbers1M, 0, 1000000);
+
+        SW.reset();
+        SW.start();
+        qsmt = new QuickSortMultiThread(numbers1M);
+        qsmt.run();
+        SW.stop();
+        periods.QuickSortMT10K = SW.getPeriod();
+        System.out.println("Time of QuickSorting MT, 1M  Elemints using Just Array:" + SW.getPeriod() + " = " + getTimed(SW.getPeriod()));
+
+        //check if array sorted
+        if (!isArraySorted(numbers1M)) {
+            System.out.println("there is error in sorting");
+        }
 
     }
 

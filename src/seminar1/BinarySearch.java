@@ -192,8 +192,17 @@ public class BinarySearch
     }
 
     static int binaryCounter = 0;
-    public static void resetBinaryCounter(){binaryCounter = 0;}
-    public static int getBinaryCounter(){return binaryCounter;}
+
+    public static void resetBinaryCounter()
+    {
+        binaryCounter = 0;
+    }
+
+    public static int getBinaryCounter()
+    {
+        return binaryCounter;
+    }
+
     public static int binarySearch(int[] a, int x)
     {
 
@@ -215,22 +224,41 @@ public class BinarySearch
     }
 
     static int advBinaryCounter = 0;
-    public static void resetAdvBinaryCounter(){advBinaryCounter = 0;}
-    public static int getAdvBinaryCounter(){return advBinaryCounter;}
-    
+
+    public static void resetAdvBinaryCounter()
+    {
+        advBinaryCounter = 0;
+    }
+
+    public static int getAdvBinaryCounter()
+    {
+        return advBinaryCounter;
+    }
+
     public static int binarySearchAdv(int[] a, int x)
     {
         int low = 0, high = a.length - 1;
 
         if (x > a[high] || x < a[low]) {
-            System.out.println("Adv binary Search iteration counter " + advBinaryCounter);
             return -1; // NOT_FOUND
         }
+        if (a[high] == a[low]) {
+            // all array values are the same 
+            if (x == a[low]) {
+                return 0; //return the postion of first one
+            } else {
+                return -1; // value not found
+            }
+        }
+        //TODO if low bigger than high then the array is not correctly sorted
 
-        //int mid = (int)((double)(x - a[low]) / (a[high] - a[low]) * (a.length - 1));
         while (low <= high) {
             advBinaryCounter++; //count how many iteration it take to find the value
-            int mid = (int)((double)(x - a[low]) / (a[high] - a[low]) * (high - low)) + low;
+            int mid = (high * (x - a[low]) + low * (a[high] - x)) / (a[high] - a[low]);
+            int mid2 = (int) ((double) (x - a[low]) / (a[high] - a[low]) * (high - low)) + low;
+            if (mid != mid2) {
+                System.out.println("STOP");
+            }
             if (a[mid] < x) {
                 low = mid + 1;
             } else if (a[mid] > x) {
@@ -240,7 +268,7 @@ public class BinarySearch
             }
             //mid = (low + high) / 2;
         }
-        return -1; // NOT FOUND is defined as -1
+        return -1; // NOT FOUND 
     }
 
     private static Integer binarySearch(List<Integer> a, int x)

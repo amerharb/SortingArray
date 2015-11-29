@@ -3,6 +3,12 @@ package seminar1;
 public class MergeSort
 {
 
+    public static void iterativeMergeSort(int[] list)
+    {
+        int[] tmpArray = new int[list.length];
+        mergeSort(list, tmpArray, 0, list.length - 1);
+    }
+
     public static void mergeSort(int[] list)
     {
         int[] tmpArray = new int[list.length];
