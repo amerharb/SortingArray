@@ -54,7 +54,7 @@ public class QuickSortMultiThread implements Runnable
             }
             tempLarger = null;
 
-            if (smaller.length > 5) {
+            if (smaller.length > 100) {
                 QuickSortMultiThread sortSmaller = new QuickSortMultiThread(smaller);
                 Thread sortSmallerThread = new Thread(sortSmaller);
                 sortSmallerThread.start();

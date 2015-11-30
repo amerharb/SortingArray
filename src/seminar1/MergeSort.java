@@ -3,16 +3,10 @@ package seminar1;
 public class MergeSort
 {
 
-    public static void iterativeMergeSort(int[] list)
+    public static void mergeSort(int[] a)
     {
-        int[] tmpArray = new int[list.length];
-        mergeSort(list, tmpArray, 0, list.length - 1);
-    }
-
-    public static void mergeSort(int[] list)
-    {
-        int[] tmpArray = new int[list.length];
-        mergeSort(list, tmpArray, 0, list.length - 1);
+        int[] tmpArray = new int[a.length];
+        mergeSort(a, tmpArray, 0, a.length - 1);
     }
 
     private static void mergeSort(int[] a, int[] tmpArray, int left, int right)
@@ -25,8 +19,7 @@ public class MergeSort
         }
     }
 
-    private static void merge(int[] a, int[] tmpArray,
-            int leftPos, int rightPos, int rightEnd)
+    private static void merge(int[] a, int[] tmpArray, int leftPos, int rightPos, int rightEnd)
     {
         int leftEnd = rightPos - 1;
         int tmpPos = leftPos;

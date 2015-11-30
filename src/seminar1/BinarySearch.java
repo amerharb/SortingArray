@@ -191,6 +191,33 @@ public class BinarySearch
         return -1; // NOT_FOUND is defined as -1
     }
 
+    public static int getFirst(int[] list, int l)
+    {
+        int v = list[l];
+        for (int i = l - 1; i >= 0; i--) {
+            if (list[i] == v) {
+                l--;
+            } else {
+                return l;
+            }
+        }
+        return l;
+    }
+
+    public static int getLast(int[] list, int l) //get last location of the same value in array in case its repeted
+    {
+        int v = list[l];
+        for (int i = l + 1; i < list.length; i++) {
+            if (list[i] == v) {
+                l++;
+            } else {
+                return l;
+            }
+        }
+        return l;
+
+    }
+
     static int binaryCounter = 0;
 
     public static void resetBinaryCounter()
