@@ -164,9 +164,9 @@ public class Seminar1
                 //QuickSort Just Array
                 quickSortJustArray();
                 if (isArraySorted(numbers100) && isArraySorted(numbers10K) && isArraySorted(numbers1M)) {
-                    System.out.println("Sorted");
+                    System.out.println("Arrays Checked, they are Sorted Correctly");
                 } else {
-                    System.out.println("Not Sorted");
+                    System.out.println("Mistake in Sorting, problem in Sorting");
                 }
 
                 //QuickSort Just Array Multi Threads
@@ -180,6 +180,14 @@ public class Seminar1
             }
 
             if (ans.contains("I") || ans.contains("A")) {
+                //InsertSort using just Array
+                insertSortingJustArray();
+                if (isArraySorted(numbers100) && isArraySorted(numbers10K) && isArraySorted(numbers1M)) {
+                    System.out.println("Arrays Checked, they are Sorted Correctly");
+                } else {
+                    System.out.println("Mistake in Sorting, problem in Sorting");
+                }
+
                 //Insertsorting ArrayList
                 insertSortingArrayList();
                 if (isArrayListSorted(numbersList100) && isArrayListSorted(numbersList10K) && isArrayListSorted(numbersList1M)) {
@@ -188,8 +196,6 @@ public class Seminar1
                     System.out.println("Mistake in Sorting, problem in Sorting");
                 }
 
-                //InsertSort using just Array
-                insertSortingJustArray();
             }
         }
 
