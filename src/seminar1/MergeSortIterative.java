@@ -11,7 +11,6 @@ package seminar1;
  */
 public class MergeSortIterative
 {
-
     public static void iterativeMergeSort(int[] a)
     {
         //create 2 dimention array from a array that have only 1 element each
@@ -19,6 +18,7 @@ public class MergeSortIterative
         for (int i = 0; i < a.length; i++) {
             m[i] = new int[]{a[i]};
         }
+        
         while (m.length > 1) {
             int[][] t = new int[m.length / 2 + m.length % 2][];
             int x = 0;
@@ -49,6 +49,7 @@ public class MergeSortIterative
         for (int i = 0; i < a.length; i++) {
             a[i] = m[0][i];
         }
+        
     }
 
     private static int[] merge(int[] a, int[] b)
